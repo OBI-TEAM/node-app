@@ -21,7 +21,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
     - name: Build and push Docker image
       env:
-        ECR_REGISTRY: 288408890206.dkr.ecr.ap-south-1.amazonaws.com/onebillionideas
+        ECR_REGISTRY: 288408890206.dkr.ecr.ap-south-1.amazonaws.com
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t $ECR_REGISTRY/onebillionideas:${IMAGE_TAG} .
