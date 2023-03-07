@@ -3,7 +3,7 @@ name: Obi Test
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-push:
