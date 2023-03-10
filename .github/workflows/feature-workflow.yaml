@@ -4,7 +4,7 @@ name: Obi Test
 on:
   push:
     branches:
-      - feature/obitest
+      - feature/obi
 
 jobs:
   build-and-push:
@@ -30,7 +30,7 @@ jobs:
     - name: Deploy Docker image to EC2
       run: |
         # replace with your own script to deploy the image
-        ssh ec2-user@your-ec2-instance-ip-address "docker pull your-docker-registry/${{ env.IMAGE_NAME }}:${{ env.TAG }} && docker run -d -p 80:80 your-docker-registry/${{ env.IMAGE_NAME }}:${{ env.TAG }}"
+        ssh ec2-user@13.235.39.142 "docker pull $ECR_REGISTRY/onebillionideas:${IMAGE_TAG} && docker run -d -p 8080:8080 $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}"
         
   sonar_analyze:
     name: Maven Sonarqube Analysis
