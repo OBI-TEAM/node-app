@@ -27,6 +27,10 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/onebillionideas:${IMAGE_TAG} .
         docker push $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
+    - name: Deploy Docker image to EC2
+      run: |
+        # replace with your own script to deploy the image
+        ssh ec2-user@your-ec2-instance-ip-address "docker pull your-docker-registry/${{ env.IMAGE_NAME }}:${{ env.TAG }} && docker run -d -p 80:80 your-docker-registry/${{ env.IMAGE_NAME }}:${{ env.TAG }}"
         
   sonar_analyze:
     name: Maven Sonarqube Analysis
