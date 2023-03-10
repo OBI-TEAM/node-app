@@ -15,7 +15,7 @@ jobs:
     - name: Install SSH client
       run: sudo apt-get install openssh-client
     #- name: Add EC2 to known hosts
-    #  run: ssh-keyscan -H 13.235.39.142> >> ~/.ssh/known_hosts
+    #   run: ssh-keyscan -H 13.235.39.142> >> ~/.ssh/known_hosts
     - name: SSH to EC2 and run commands
       env:
         EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
