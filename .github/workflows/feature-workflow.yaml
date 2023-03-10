@@ -4,7 +4,7 @@ name: Obi Test
 on:
   push:
     branches:
-      - feature/obi/fg
+      - feature/obi
 
 jobs:
   containerize-app:
