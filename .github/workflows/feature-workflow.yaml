@@ -4,7 +4,7 @@ name: Obi Test
 on:
   push:
     branches:
-      - feature/obi/test
+      - feature/obi
 
 jobs:
   app-containerize:
@@ -44,10 +44,12 @@ jobs:
         ECR_REGISTRY: 665403465716.dkr.ecr.ap-south-1.amazonaws.com
         IMAGE_TAG: ${{ github.sha }}
         script: |
-           docker stop my-docker-container || true
-           docker rm my-docker-container || true
-           docker run -d --name my-docker-container -p 80:80 my-docker-image:latest
-	    
+            docker pull $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
+            docker stop my-docker-container || true
+            docker rm my-docker-container || true
+            docker run -d --name my-docker-container -p 8080:8080 $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}	    
+  
+  
   sonar_analyze:
     name: Maven Sonarqube Analysis
     runs-on: ubuntu-latest
