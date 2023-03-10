@@ -14,5 +14,5 @@ app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
 app.get('/', (req, res) => {
-  res.send('<h1 style="color:red;">Java Home App - 11 version 08th March` </h1> \n');
+  res.send('<h1 style="color:red;">ERPl LMS OBI App CICD Full Flow Established 11th March` </h1> \n');
 });
