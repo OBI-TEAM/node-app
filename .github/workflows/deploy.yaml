@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: SSH into EC2 instance and deploy Docker container
+    - name: SSH into EC2 instance and deploy container
       uses: appleboy/ssh-action@v0.1.5
       with:
         host: ${{ secrets.SERVER_IP }}
