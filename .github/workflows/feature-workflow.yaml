@@ -27,9 +27,6 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/onebillionideas:${IMAGE_TAG} .
         docker push $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
-        docker stop my-docker-container || true
-        docker rm my-docker-container || true
-	      docker run -d --name my-docker-container -p 8080:8080 $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
   deploy:
     needs: app-containerize
     runs-on: ubuntu-latest
@@ -44,9 +41,10 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.EC2_PASSWORD }}
         script: |
-            docker pull $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
-
-        
+            docker stop my-docker-container || true
+            docker rm my-docker-container || true
+            docker run -d --name my-docker-container -p 80:80 my-docker-image:latest
+	    
   sonar_analyze:
     name: Maven Sonarqube Analysis
     runs-on: ubuntu-latest
