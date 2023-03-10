@@ -4,7 +4,7 @@ name: Obi Test
 on:
   push:
     branches:
-      - feature/obi
+      - feature/obitest
 
 jobs:
   build-and-push:
