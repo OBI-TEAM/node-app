@@ -28,14 +28,15 @@ jobs:
         docker build -t $ECR_REGISTRY/onebillionideas:${IMAGE_TAG} .
         docker push $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
   deploy:
+    needs: app-containerize
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Install SSH client
       run: sudo apt-get install openssh-client
-    - name: Add EC2 to known hosts
-      run: ssh-keyscan -H 13.235.39.142> >> ~/.ssh/known_hosts
+    #- name: Add EC2 to known hosts
+    #  run: ssh-keyscan -H 13.235.39.142> >> ~/.ssh/known_hosts
     - name: SSH to EC2 and run commands
       env:
         EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
