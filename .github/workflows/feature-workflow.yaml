@@ -42,8 +42,6 @@ jobs:
         password: ${{ secrets.EC2_PASSWORD }}
         script: |
           docker pull $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
-          docker stop $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
-          docker rm $ECR_REGISTRY/onebillionideas:${IMAGE_TAG} || true
           docker run -d -p 8080:8080 $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
         
   sonar_analyze:
