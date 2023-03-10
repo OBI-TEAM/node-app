@@ -42,7 +42,7 @@ jobs:
         password: ${{ secrets.EC2_PASSWORD }}
         script: |
             docker pull $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
-            docker run -d --name my-docker-container -p 8080:8080 $ECR_REGISTRY/onebillionideas:${IMAGE_TAG}
+
         
   sonar_analyze:
     name: Maven Sonarqube Analysis
