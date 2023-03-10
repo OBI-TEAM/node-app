@@ -42,4 +42,6 @@ jobs:
         password: ${{ secrets.EC2_PASSWORD }}
         script: |
             docker pull 665403465716.dkr.ecr.ap-south-1.amazonaws.com/onebillionideas:erp-lms-v1
+            docker stop erp-lms-container || true
+            docker rm erp-lms-container || true
             docker run -d --name erp-lms-container -p 8080:8080 665403465716.dkr.ecr.ap-south-1.amazonaws.com/onebillionideas:erp-lms-v1
