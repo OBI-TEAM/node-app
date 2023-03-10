@@ -4,11 +4,10 @@ name: Obi Test
 on:
   push:
     branches:
-      - feature/obitsr
+      - feature/obi
 
 jobs:
   deploy:
-    needs: app-containerize
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
