@@ -7,7 +7,7 @@ on:
       - feature/obi/fg
 
 jobs:
-  build-and-push:
+  containerize-app:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
