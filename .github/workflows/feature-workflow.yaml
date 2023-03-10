@@ -25,9 +25,8 @@ jobs:
         ECR_REGISTRY: 665403465716.dkr.ecr.ap-south-1.amazonaws.com
         IMAGE_TAG: v1
       run: |
-        docker build -t erp-lms-obi:v1 .
-        docker tag erp-lms-obi:v1 $ECR_REGISTRY/erp-lms-obi:v1
-        docker push $ECR_REGISTRY/erp-lms-obi:v1
+        docker build -t $ECR_REGISTRY/onebillionideas:erp-lms-v1 .
+        docker push $ECR_REGISTRY/onebillionideas:erp-lms-v1
   deploy:
     needs: app-containerize
     runs-on: ubuntu-latest
@@ -42,5 +41,5 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.EC2_PASSWORD }}
         script: |
-            docker pull 665403465716.dkr.ecr.ap-south-1.amazonaws.com/erp-lms-obi:v1
-            docker run -d --name erp-lms-container -p 8080:8080 erp-lms-obi:v1
+            docker pull 665403465716.dkr.ecr.ap-south-1.amazonaws.com/onebillionideas:erp-lms-v1
+            docker run -d --name erp-lms-container -p 8080:8080 665403465716.dkr.ecr.ap-south-1.amazonaws.com/onebillionideas:erp-lms-v1
