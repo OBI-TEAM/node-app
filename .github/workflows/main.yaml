@@ -46,7 +46,8 @@ jobs:
             docker rm erp-lms-container || true
             docker run -d --name erp-lms-container -p 8080:8080 665403465716.dkr.ecr.ap-south-1.amazonaws.com/onebillionideas:erp-lms-v1
     - name: Notify Slack
-      uses: asconsoft/action-slack@v4.0.1
+      uses: rtCamp/action-slack-notify@v2
+      # uses: asconsoft/action-slack@v4.0.1
       with:
         channel: '#deployment'
         if_mention: failure,cancelled
