@@ -45,7 +45,19 @@ jobs:
             docker stop erp-lms-container || true
             docker rm erp-lms-container || true
             docker run -d --name erp-lms-container -p 8080:8080 665403465716.dkr.ecr.ap-south-1.amazonaws.com/onebillionideas:erp-lms-v1
-            
+    - name: Notify Slack
+      uses: asconsoft/action-slack@v4.0.1
+      with:
+        channel: '#deployment'
+        if_mention: failure,cancelled
+        status: ${{ job.status }}
+        fields: workflow,job,commit,repo,ref,author
+        text_success: ':rocket: `erp-lms` is successfully deployed in an EC2 instance'
+        text_failure: ':boom: `erp-lms` has failed to be deployed :-1:; working on it :hammer_and_wrench:'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+      if: always() # Pick up events even if the job fails or is canceled.       
           
   sonar_analyze:
     needs: docker-build-and-push
