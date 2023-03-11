@@ -4,7 +4,7 @@ name: erp-lms-service
 on:
   push:
     branches:
-      - master/test
+      - master
 
 jobs:
   docker-build-and-push:
