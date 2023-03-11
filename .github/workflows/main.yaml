@@ -56,8 +56,9 @@ jobs:
         text_success: ':rocket: `erp-lms` is successfully deployed in an EC2 instance'
         text_failure: ':boom: `erp-lms` has failed to be deployed :-1:; working on it :hammer_and_wrench:'
       env:
-        SLACK_GIT_TOKEN: ${{ secrets.SLACK_GIT_TOKEN }} # optional
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        SLACK_WEBHOOK: ${{ secrets.SLACK_GIT_TOKEN }}
+        #SLACK_GIT_TOKEN: ${{ secrets.SLACK_GIT_TOKEN }} # optional
+        #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
       if: always() # Pick up events even if the job fails or is canceled.       
           
   sonar_analyze:
