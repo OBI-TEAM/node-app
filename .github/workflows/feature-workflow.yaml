@@ -4,7 +4,7 @@ name: erp-lms-service
 on:
   push:
     branches:
-      - feature/obi
+      - feature/obi/test
 
 jobs:
   docker-build-and-push:
