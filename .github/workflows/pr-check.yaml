@@ -23,7 +23,8 @@ jobs:
     - name: Danger
       uses: danger/danger-js@9.1.8
       env:
-        SLACK_GIT_TOKEN: ${{ secrets.SLACK_GIT_TOKEN }} # optional
+        # SLACK_GIT_TOKEN: ${{ secrets.SLACK_GIT_TOKEN }} # optional
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Notify Slack
       uses: asconsoft/action-slack@v4.0.1
       with:
