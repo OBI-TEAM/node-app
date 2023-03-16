@@ -4,24 +4,38 @@ name: erp-lms-service
 on:
   push:
     branches:
-      - feature/obi/test
+      - feature/obi
 
 jobs:
-  deploy-Container:
+  unit-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm test
     - name: Notify Slack
+      # uses: rtCamp/action-slack-notify@v2
       uses: asconsoft/action-slack@v4.0.1
       with:
         channel: '#deployment'
         if_mention: failure,cancelled
         status: ${{ job.status }}
         fields: workflow,job,commit,repo,ref,author
-        text_success: ':rocket: `erp-lms` is successfully deployed in an EC2 instance'
-        text_failure: ':boom: `erp-lms` has failed to be deployed :-1:; working on it :hammer_and_wrench:'
+        text_success: ':rocket: Unit test cases has been successfully verified `erp-lms` app'
+        text_failure: ':boom: Some of the test cases in `erp-lms` app has not passed. Check the Actions logs :-1:; working on it :hammer_and_wrench:'
       env:
+        #SLACK_WEBHOOK: ${{ secrets.SLACK_GIT_TOKEN }}
         SLACK_GIT_TOKEN: ${{ secrets.SLACK_GIT_TOKEN }} # optional
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-      if: always() # Pick up events even if the job fails or is canceled.       
+      if: always() # Pick up events even if the job fails or is canceled. 
         
             
