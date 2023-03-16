@@ -1,7 +1,7 @@
 on:
   pull_request:
     branches:
-      - feature/obi
+      - feature/obitest
     paths-ignore:
       - .github/**
     
